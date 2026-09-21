@@ -9,8 +9,8 @@ package-lock.json
 *.log 
 
 *.gz 
+*.env
 
- 
 
 # build folder 
 
