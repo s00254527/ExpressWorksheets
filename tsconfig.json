@@ -26,6 +26,6 @@
     "types": ["node"]
   },
 
-  "include": ["src/**/*", "controllers/**/*", "routes/**/*"],
+  "include": ["src/**/*", "controllers/**/*", "src/routes/**/*"],
   "exclude": ["node_modules", "build"]
 }
