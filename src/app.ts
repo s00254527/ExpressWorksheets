@@ -1,4 +1,4 @@
-import express, {Application, Request, Response} from "express" ; 
+import express, {Application} from "express" ; 
 import {env} from "./config/env";
 import { connectDB } from "./database/db";
 import carRoutes from "../src/routes/cars";
