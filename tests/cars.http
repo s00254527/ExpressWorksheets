@@ -7,7 +7,7 @@
 ### 
 
 
-POST {{endpoint}} HTTP/1.1 
+POST {{endpoint}}/sillyCarID HTTP/1.1 
 
 content-type: application/json 
 
@@ -35,7 +35,7 @@ content-type: application/json
 
  
 
-DELETE  {{endpoint}}/sillycarID HTTP/3.0 
+DELETE  {{endpoint}}/1 HTTP/3.0 
 
 content-type: application/json 
 
