@@ -5,18 +5,8 @@ import { CarService } from '../services/CarService';
 
 const carService = new CarService();
 
-export const getCars = async (_req: Request, res: Response): Promise<void> => { 
-
-    try { 
-      const cars = await carService.getAllCars(); 
-      res.status(200).json(cars); 
-    } catch (error) { 
-      res.status(500).json({ message: 'Error fetching cars', error }); 
-    } 
-  }; 
-
   export const getCarById = async (req: Request, res: Response): Promise<void> => { 
-
+//so these controller methods are corrisponding witht he other files. 
     try { 
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id; 
       const car = await carService.getCarById(id); 
@@ -33,6 +23,7 @@ export const getCars = async (_req: Request, res: Response): Promise<void> => {
   export const createCar = async (req: Request, res: Response): Promise<void> => { 
 
     try { 
+    console.log("body:", req.body);
       const newCar = await carService.createCar(req.body); 
       res.status(201).json(newCar); 
 

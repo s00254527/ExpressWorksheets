@@ -7,13 +7,17 @@
 ### 
 
 
-POST {{endpoint}}/sillyCarID HTTP/1.1 
+### Create a car
+POST {{endpoint}} HTTP/3.0
+Content-Type: application/json
 
-content-type: application/json 
+{
+  "make": "Toyota",
+  "model": "Corolla"
+}
 
- 
-
- 
+### Get one car (use a real _id returned from the POST above)
+GET {{endpoint}}/66f8a1b2c3d4e5f678901234 HTTP/1.1
 
 ### 
 GET  {{endpoint}} HTTP/3.0 
@@ -35,7 +39,7 @@ content-type: application/json
 
  
 
-DELETE  {{endpoint}}/1 HTTP/3.0 
+DELETE  {{endpoint}}/sillycarID HTTP/3.0 
 
 content-type: application/json 
 

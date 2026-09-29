@@ -15,6 +15,7 @@ export class CarService {
  
   async createCar(carData: ICar): Promise<HydratedDocument<ICar>> { 
     const car = new CarModel(carData); 
+    console.log(carData.make, carData.model);
     return await car.save(); 
   } 
  

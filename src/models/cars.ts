@@ -13,7 +13,7 @@ const carSchema = new Schema<ICar>(
     },
     {timestamps:true}
 );
-//exporting the model so that it can be used in other files.
+//exporting the model so that it can be sent off to the db. 
 export const CarModel = model<ICar>("Car", carSchema);
 
 
