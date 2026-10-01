@@ -1,11 +1,12 @@
-import { CarModel, ICar } from '../models/cars'
-import { HydratedDocument } from 'mongoose';
+
 import { Request, Response } from 'express';
 import { CarService } from '../services/CarService';
 
 const carService = new CarService();
 
-  export const getCarById = async (req: Request, res: Response): Promise<void> => { 
+export class CarController {
+
+   getCarById = async (req: Request, res: Response): Promise<void> => { 
 //so these controller methods are corrisponding witht he other files. 
     try { 
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id; 
@@ -20,8 +21,16 @@ const carService = new CarService();
     } 
   }; 
 
-  export const createCar = async (req: Request, res: Response): Promise<void> => { 
+getAllCars = async (_req: Request, res: Response): Promise<void> => {
+    try { 
+      const cars = await carService.getAllCars();
+      res.status(200).json(cars);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching cars', error });
+    } 
+  };
 
+  createCar2 = async (req: Request, res: Response): Promise<void> => { 
     try { 
     console.log("body:", req.body);
       const newCar = await carService.createCar(req.body); 
@@ -33,8 +42,7 @@ const carService = new CarService();
   }; 
 
  
-
-  export const updateCar = async (req: Request, res: Response): Promise<void> => { 
+ updateCar = async (req: Request, res: Response): Promise<void> => { 
     try { 
       const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id; 
       const updatedCar = await carService.updateCar(id, req.body); 
@@ -50,13 +58,25 @@ const carService = new CarService();
     } 
   }; 
 
- 
 
-  export const deleteCar = async (_req: Request, res: Response): Promise<void> => { 
-    res.status(200).json({ success: true,  
+ deleteCar = async (_req: Request, res: Response): Promise<void> => { 
+  const id = Array.isArray(_req.params.id) ? _req.params.id[0] : _req.params.id;
+    try { 
+      const deletedCar = await carService.deleteCar(id);
+      if (!deletedCar) { 
+        res.status(404).json({ message: 'Car not found' }); 
+        return; 
+      }  
+}catch(error) {
+      res.status(500).json({ message: 'Error deleting car', error }); 
+      return; 
+    }
+  
+  res.status(200).json({ success: true,  
       data: `this is just dummy for now a response to the delete car by id request with car id ${_req.params.id}` });  
 
-  }; 
+  };
+};
 
 
 
@@ -104,30 +124,27 @@ const carService = new CarService();
 
 
 
-
-
-
-export class CarController {
-  async getAllCars(): Promise<ICar[]> {
-    return await CarModel.find().lean();
-  } 
-  async getCarById(id: string): Promise<ICar | null> { 
-    return await CarModel.findById(id).lean(); 
-  } 
-  async createCar(carData: ICar): Promise<HydratedDocument<ICar>> { 
-    const car = new CarModel(carData); 
-    return await car.save();
-  } 
+// export class CarController {
+//   async getAllCars(): Promise<ICar[]> {
+//     return await CarModel.find().lean();
+//   } 
+//   async getCarById(id: string): Promise<ICar | null> { 
+//     return await CarModel.findById(id).lean(); 
+//   } 
+//   async  (carData: ICar): Promise<HydratedDocument<ICar>> { 
+//     const car = new CarModel(carData); 
+//     return await car.save();
+//   } 
  
-  async updateCar(id: string, carData: Partial<ICar>): Promise<ICar | null> { 
-    return await CarModel.findByIdAndUpdate(id, carData, { returnDocument: 'after' }).lean(); 
-  } 
+//   async updateCar(id: string, carData: Partial<ICar>): Promise<ICar | null> { 
+//     return await CarModel.findByIdAndUpdate(id, carData, { returnDocument: 'after' }).lean(); 
+//   } 
 
-  async deleteCar(id: string): Promise<ICar | null> { 
-    return await CarModel.findByIdAndDelete(id).lean(); 
-  } 
+//   async deleteCar(id: string): Promise<ICar | null> { 
+//     return await CarModel.findByIdAndDelete(id).lean(); 
+//   } 
 
-}
+// }
 
 
 
