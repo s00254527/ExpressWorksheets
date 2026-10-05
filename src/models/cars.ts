@@ -1,4 +1,4 @@
-import {Schema,model} from "mongoose";
+import {Schema} from "mongoose";
 import {z} from "zod";
 
 //creating an interface for the car model with 3 types 
