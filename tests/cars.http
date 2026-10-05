@@ -54,3 +54,18 @@ content-type: application/json
 Get http://localhost:3000/api/v1/cars HTTP/3.0
 Content-Type: application/json
 x-api-key: blahblah
+
+###
+@openapi 
+  /cars: 
+    get: 
+      summary: Retrieve all cars 
+      tags: 
+        - Cars 
+     responses:
+        200: 
+          description: Successfully retrieved cars 
+        500: 
+  description: Internal server error 
+
+ 
