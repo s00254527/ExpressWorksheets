@@ -23,6 +23,7 @@
   "dependencies": {
     "dotenv": "^18.0.1",
     "mongoose": "^9.10.1",
-    "node": "^26.9.0"
+    "node": "^26.9.0",
+    "zod": "^4.6.5"
   }
 }

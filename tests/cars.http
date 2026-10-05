@@ -12,7 +12,8 @@ POST {{endpoint}} HTTP/3.0
 content-type: application/json
 
 {"make": "Toyota",
-  "model": "Corolla"
+  "model": "Corolla",
+  "year": 2020
 }
 
 ###

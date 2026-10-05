@@ -1,21 +1,23 @@
 import { Router } from 'express'; 
 import { CarController } from '../controllers/cars'; 
-import { authenticateKey } from '../middleware/auth.middleware';
+import { validate } from '../middleware/auth.middleware';
+import { carSchemaZSchema } from '../models/cars';
+
 
 //updated the routes to include the authenticateKey middleware for all routes.
 //seems to be working so im happy out 
 const router = Router(); 
 const carController = new CarController(); 
 
-router.get('/',authenticateKey, carController.getAllCars); 
+router.get('/',validate(carSchemaZSchema), carController.getAllCars); 
 
-router.get('/:id', authenticateKey, carController.getCarById); 
+router.get('/:id', validate(carSchemaZSchema), carController.getCarById); 
 
 
-router.post('/', authenticateKey, carController.createCar2); 
+router.post('/', validate(carSchemaZSchema), carController.createCar2); 
 
 //router.put('/:id', carController.updateCar); 
 
-router.delete('/:id', authenticateKey, carController.deleteCar); 
+router.delete('/:id', validate(carSchemaZSchema), carController.deleteCar); 
 
 export default router; 

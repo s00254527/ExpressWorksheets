@@ -1,6 +1,7 @@
 
 import { Request, Response } from 'express';
 import { CarService } from '../services/CarService';
+import { carSchemaZSchema } from '../models/cars';
 
 const carService = new CarService();
 
@@ -39,6 +40,11 @@ getAllCars = async (_req: Request, res: Response): Promise<void> => {
     } catch (error) { 
       res.status(500).json({ message: 'Error inserting into MongoDB', error }); 
     } 
+const validation = carSchemaZSchema.safeParse(req.body);
+    if (!validation.success) { 
+      res.status(400).json({ message: 'Invalid car data', errors: validation.error.issues }); 
+      return; 
+    }
   }; 
 
  

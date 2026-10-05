@@ -1,6 +1,9 @@
 
-import { CarModel, ICar } from '../models/cars' 
-import { HydratedDocument } from 'mongoose'; 
+import { ICar, CarModel as CarSchema } from '../models/cars'
+import { HydratedDocument, model } from 'mongoose';
+
+const CarModel = model<ICar>('Car', CarSchema);
+
  
 
 export class CarService { 
@@ -15,7 +18,7 @@ export class CarService {
  
   async createCar(carData: ICar): Promise<HydratedDocument<ICar>> { 
     const car = new CarModel(carData); 
-    console.log(carData.make, carData.model);
+    console.log(carData.make, carData.model, carData.year);
     return await car.save(); 
   } 
  
