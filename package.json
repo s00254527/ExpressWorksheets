@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "build": "tsc",
-    "start": "node build/src/app.js",
-    "dev": "tsx watch src/app.ts"
+    "start": "node build/src/server.js",
+    "dev": "tsx watch src/server.ts",
+    "testLwatch":"vitest"
   },
   "keywords": [],
   "author": "",

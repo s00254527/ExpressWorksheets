@@ -4,7 +4,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "outDir": "./build",
-    "rootDir": ".",
+    "rootDir": "./",
 
     /* Strict Type-Checking */
     "strict": true,
@@ -23,9 +23,9 @@
 
     /* Emit & Types */
     "sourceMap": true,
-    "types": ["node"]
+    "types": ["node","vitest/globals"]
   },
 
-  "include": ["src/**/*", "src/controllers/**/*", "src/routes/**/*"],
+  "include": ["src/**/*.ts", "src/controllers/**/*", "src/routes/**/*","tests/**/*"],
   "exclude": ["node_modules", "build"]
 }
