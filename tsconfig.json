@@ -26,6 +26,6 @@
     "types": ["node","vitest/globals"]
   },
 
-  "include": ["src/**/*.ts", "src/controllers/**/*", "src/routes/**/*","tests/**/*"],
+  "include": ["src/**/*.ts", "src/controllers/**/*", "src/routes/**/*","tests/**/*", "tests/cars.tests.ts"],
   "exclude": ["node_modules", "build"]
 }

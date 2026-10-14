@@ -1,6 +1,11 @@
 import { env } from "../config/env";
 import mongoose from "mongoose";
 
+ 
+export const disconnectDB = async (): Promise<void> => { 
+  await mongoose.disconnect(); 
+} 
+
 
 export const connectDB = async () : Promise<void> => {
   try{
@@ -13,3 +18,9 @@ export const connectDB = async () : Promise<void> => {
     process.exit(1);
   }
 };
+
+afterAll(async () => { 
+    console.log('Run once after tests'); 
+   await disconnectDB(); 
+
+}); 
