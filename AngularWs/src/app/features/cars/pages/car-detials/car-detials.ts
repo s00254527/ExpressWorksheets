@@ -17,8 +17,8 @@ export class CarDetials {
   readonly car = signal<Car  | null>(null);
 
   ngOnInit(): void {
-    this.carService.getCardsById(Number(this.id())).subscribe(car =>{
-      this.car.set(car[0] ?? null);
+    this.carService.getCarById(this.id()).subscribe(car => {
+      this.car.set(car ?? null);
     });
   }
 }
