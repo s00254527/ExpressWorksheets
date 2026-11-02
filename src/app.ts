@@ -10,6 +10,7 @@ import cors from "cors";
 export const app: Application = express(); 
 app.use(cors());
 app.use(express.json());
+app.use((_req, _res, next) => setTimeout(next, 2000)); // Simulate a delay of 1 second
 
 app.use('/api/v1/cars',validate(carSchemaZSchema), carRoutes);
 //importing swagger 

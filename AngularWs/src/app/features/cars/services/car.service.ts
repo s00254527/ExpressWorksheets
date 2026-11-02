@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { error } from 'console';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { CreateCarDto } from '../models/car.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class CarService {
     return this.http.get<Car[]>(`${this.apiUrl}/${id}`);
   }
 
-  addCar(car: Car): Observable<Car> {
+  addCar(car: CreateCarDto): Observable<Car> {
     return this.http.post<Car>(this.apiUrl, car)
     .pipe(
       catchError(this.handleError)
