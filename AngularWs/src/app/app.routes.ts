@@ -6,6 +6,7 @@ import { CarForm } from './features/cars/pages/car-form/car-form';
 export const routes: Routes = [
     {path:'', redirectTo: 'cars', pathMatch: 'full'},
     {path:'cars', component: CarList},
-    {path:'cars/:id',component:CarDetials},
     {path:'cars/new',component:CarForm},
+    {path:'cars/:id',component:CarDetials},
+    
 ];
