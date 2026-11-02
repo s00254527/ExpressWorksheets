@@ -19,8 +19,7 @@ export const connectDB = async () : Promise<void> => {
   }
 };
 
-afterAll(async () => { 
-    console.log('Run once after tests'); 
-   await disconnectDB(); 
-
-}); 
+ afterAll(async () => {
+       console.log('Run once after tests');
+       await disconnectDB();
+   });
