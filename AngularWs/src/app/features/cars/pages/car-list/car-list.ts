@@ -1,9 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, inject } from '@angular/core';
 import { CarService } from '../../services/car.service';
-import { Car } from '../../models/car.model';
 import { AsyncPipe } from '@angular/common';
 import { CarCard } from '../car-card/car-card';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-car-list',
@@ -12,13 +11,10 @@ import { CarCard } from '../car-card/car-card';
   templateUrl: './car-list.html',
   styleUrl: './car-list.scss',
 })
-export class CarList implements OnInit {
+export class CarList  {
 
-  private carService = inject(CarService);
-   cars$!: Observable<Car[]>;
+private carService = inject(CarService);
   
-  ngOnInit(): void {
-    this.cars$ = this.carService.getCars();
-  }
-  
+   cars = toSignal(this.carService.getCars());
 }
+
