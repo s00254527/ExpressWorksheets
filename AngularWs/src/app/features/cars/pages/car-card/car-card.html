@@ -5,4 +5,5 @@
   @if (car().year) {
     <p>Year: {{ car().year }}</p>
   }
+  <a [routerLink]="['/cars',car()._id]">View Details</a>
 </div>

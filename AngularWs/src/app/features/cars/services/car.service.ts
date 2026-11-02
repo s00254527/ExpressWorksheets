@@ -9,7 +9,13 @@ import { Observable } from 'rxjs/internal/Observable';
 export class CarService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/api/v1/cars';
+  //this is to get the general cars
   getCars(): Observable<Car[]> {
     return this.http.get<Car[]>(this.apiUrl);
   }
+
+  getCardsById(id: number): Observable<Car[]> {
+    return this.http.get<Car[]>(`${this.apiUrl}/${id}`);
+  }
+
 }
