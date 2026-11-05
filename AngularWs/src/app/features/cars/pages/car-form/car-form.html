@@ -33,6 +33,10 @@
     <input id="year" type="number" formControlName="year" placeholder="e.g. 2022" />
   </mat-form-field>
 
+  @if (saving()) {
+  <mat-progress-bar mode="buffer" />
+  }
+
   <!-- Action Buttons -->
     <div class="button-group">
     <button matButton="filled" type="submit" [disabled]="saving()">
