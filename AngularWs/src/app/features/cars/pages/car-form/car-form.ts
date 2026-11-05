@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { inject } from '@angular/core';
+import { Component,inject,signal } from '@angular/core';
+import { FormBuilder, Validators,ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {CreateCarDto } from '../../models/car.model';
-import{ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
+import { RouterModule,Router } from '@angular/router';
 import { CarService } from '../../services/car.service';
-import { signal } from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-car-form',
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
+  imports: [
+     ReactiveFormsModule,
+     CommonModule,
+      FormsModule,
+      RouterModule,
+      MatButtonModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatCardModule],
   templateUrl: './car-form.html',
   styleUrl: './car-form.scss',
 })
