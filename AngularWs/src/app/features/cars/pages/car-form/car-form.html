@@ -2,16 +2,27 @@
   <h2>Car Details Form</h2>
 
 
+  @if (carForm.controls.make.hasError('required')) { 
+    <mat-error>Make is required</mat-error>
+  } @else if (carForm.controls.make.hasError('minlength')) {
+    <mat-error>Make must be at least 2 characters</mat-error>
+    } @else if (carForm.controls.make.hasError('maxlength')) {
+    <mat-error>Make must be 30 characters or fewer</mat-error>
+    }
+
+
   <!-- Make Field -->
   <mat-form-field>
+    <mat-error>Make is required</mat-error>
     <label for="make">Make:</label>
     <input id="make" type="text" formControlName="make" placeholder="e.g. Toyota" />
   </mat-form-field>
 
   <!-- Model Field -->
   <mat-form-field>
+    <mat-error>Model is required</mat-error>
     <label for="model">Model:</label>
-    <input id="model" type="text" formControlName="model" placeholder="e.g. Corolla" />ZX
+    <input id="model" type="text" formControlName="model" placeholder="e.g. Corolla" />
   </mat-form-field>
   
 

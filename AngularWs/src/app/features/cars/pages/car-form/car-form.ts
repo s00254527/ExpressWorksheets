@@ -31,13 +31,19 @@ private router = inject(Router);
   saving = signal(false);
   saveError = signal<string | null>(null);
 
+  private readonly currentYear = new Date().getFullYear();
 
 carForm = this.formbuilder.nonNullable.group({
-  make: ['',Validators.required],
-  model: ['',Validators.required],
-  year: this.formbuilder.control<number | null>(null)
+  make: ['',Validators.required,Validators.minLength(2),
+    Validators.maxLength(30)],
+  model: ['',Validators.required,Validators.maxLength(30)],
+ year: this.formbuilder.control<number | null>(null, [Validators.min(1950),
+   Validators.max(this.currentYear + 1),]),
 
 });
+
+
+
   onSubmit(): void {
     const { make, model, year } = this.carForm.getRawValue();
     const newCar: CreateCarDto = { make, model, year: year ?? undefined };
