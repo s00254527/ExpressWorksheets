@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { error } from 'console';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { CreateCarDto,UpdateCarDto } from '../models/car.model';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ import { CreateCarDto,UpdateCarDto } from '../models/car.model';
 export class CarService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/api/v1/cars';
+  private readonly router = inject(Router);
 
 
   //this is to get the general cars
@@ -35,10 +37,13 @@ export class CarService {
       )
   }
  updateCar(id:string, changes:UpdateCarDto): Observable<Car> {
- 
-
   return this.http.put<Car>(`${this.apiUrl}/${id}`, changes);
 }
+
+ deletecar(id:string): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/${id}`);
+}
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     let message: string;
 

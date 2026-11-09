@@ -1,7 +1,9 @@
 <h2>Car Details</h2>
 
 <p> Car Id is {{id()}}</p>
-
+@if(deleteError()){
+  <p class="error">{{ deleteError() }}</p>
+}
 @let s = state();
 @if (s.status === 'loading') {
   <p>Loading car details...</p>
@@ -14,5 +16,9 @@
     <p>Year: {{ s.data.year }}</p>
   }
   <a matButton="filled" [routerLink]="['/cars', s.data._id, 'edit']">Edit</a>
+  <button matButton="outlined" [disabled]="deleting()" (click)="deleteCar(s.data)">
+  Delete
+</button>
+
 }
 
