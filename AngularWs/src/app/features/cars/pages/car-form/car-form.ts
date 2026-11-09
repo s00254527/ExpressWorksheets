@@ -16,16 +16,11 @@ import { error } from 'console';
 @Component({
   selector: 'app-car-form',
   imports: [
-     ReactiveFormsModule,
-     CommonModule,
-      FormsModule,
-      RouterModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatCardModule,
-      MatProgressBarModule,
-    MatError],
+    ReactiveFormsModule, CommonModule,
+    FormsModule,RouterModule,
+    MatButtonModule,MatFormFieldModule,
+    MatInputModule,MatCardModule,
+    MatProgressBarModule,MatError],
   templateUrl: './car-form.html',
   styleUrl: './car-form.scss',
 })
@@ -52,10 +47,15 @@ carForm = this.formbuilder.nonNullable.group({
   onSubmit(): void {
     const { make, model, year } = this.carForm.getRawValue();
     const newCar: CreateCarDto = { make, model, year: year ?? undefined };
-
+    const id  = this.id();
+     
+    const request = id
+    ? this.carService.updateCar(id,newCar)
+    : this.carService.addCar(newCar);
+    
     this.saving.set(true);
     this.saveError.set(null);
-    this.carService.addCar(newCar).subscribe({
+    request.subscribe({
       next: (response) => {
         this.snackBar.open(`${newCar.make} ${newCar.model} added successfully!`, 'Close', 
           {duration:10000});
@@ -71,8 +71,7 @@ carForm = this.formbuilder.nonNullable.group({
 
     ngOnInit(): void {
     const id = this.id();
-    const request = id 
-    ? this.carService.getCarById(id, newCar)
+  
     if (!id) return; // adding a new car, nothing to load
 
     this.carService.getCarById(id).subscribe({

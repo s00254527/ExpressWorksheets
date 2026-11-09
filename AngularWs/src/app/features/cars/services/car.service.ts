@@ -36,6 +36,7 @@ export class CarService {
   }
  updateCar(id:string, changes:UpdateCarDto): Observable<Car> {
  
+
   return this.http.put<Car>(`${this.apiUrl}/${id}`, changes);
 }
   private handleError(error: HttpErrorResponse): Observable<never> {
