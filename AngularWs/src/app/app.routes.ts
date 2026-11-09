@@ -8,5 +8,6 @@ export const routes: Routes = [
     {path:'cars', component: CarList},
     {path:'cars/new',component:CarForm},
     {path:'cars/:id',component:CarDetials},
+    {path:'cars/:id/edit',component:CarForm},
     
 ];

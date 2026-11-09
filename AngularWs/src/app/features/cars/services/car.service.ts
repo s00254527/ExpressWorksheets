@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, input } from '@angular/core';
 import { Car } from '../models/car.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { error } from 'console';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { CreateCarDto } from '../models/car.model';
+import { CreateCarDto,UpdateCarDto } from '../models/car.model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ import { CreateCarDto } from '../models/car.model';
 export class CarService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/api/v1/cars';
-  
+
+
   //this is to get the general cars
  getCars(): Observable<Car[]> {
   return this.http
@@ -32,8 +34,10 @@ export class CarService {
         catchError((err) => this.handleError(err))
       )
   }
-
-  
+ updateCar(id:string, changes:UpdateCarDto): Observable<Car> {
+ 
+  return this.http.put<Car>(`${this.apiUrl}/${id}`, changes);
+}
   private handleError(error: HttpErrorResponse): Observable<never> {
     let message: string;
 

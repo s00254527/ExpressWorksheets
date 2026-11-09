@@ -4,11 +4,11 @@ import { CarService } from '../../services/car.service';
 import { Observable,switchMap } from 'rxjs';
 import { LoadState ,withLoadState} from '../../../../shared/load-state';
 import { toObservable,toSignal } from '@angular/core/rxjs-interop';
-
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-car-detials',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './car-detials.html',
   styleUrl: './car-detials.scss',
 })
