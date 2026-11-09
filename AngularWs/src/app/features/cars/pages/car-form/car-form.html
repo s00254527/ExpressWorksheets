@@ -10,6 +10,9 @@
     <mat-error>Make must be 30 characters or fewer</mat-error>
     }
 
+    @if(carForm.controls.make.hasError('blank')){
+      <mat-error>Make cannot be blank</mat-error>
+    }
 
   <!-- Make Field -->
   <mat-form-field>
@@ -18,6 +21,9 @@
     <input id="make" type="text" formControlName="make" placeholder="e.g. Toyota" />
   </mat-form-field>
 
+   @if(carForm.controls.make.hasError('blank')){
+      <mat-error>Make cannot be blank</mat-error>
+    }
   <!-- Model Field -->
   <mat-form-field>
     <mat-error>Model is required</mat-error>

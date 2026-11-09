@@ -13,6 +13,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { input } from '@angular/core';
 import { error } from 'console';
+import {notBlank} from '../../../../shared/validators/not-blank.validator';
+
+
 @Component({
   selector: 'app-car-form',
   imports: [
@@ -37,8 +40,8 @@ private readonly currentYear = new Date().getFullYear();
 
 carForm = this.formbuilder.nonNullable.group({
     make: ['',Validators.required,Validators.minLength(2),
-          Validators.maxLength(30)],
-    model: ['',Validators.required,Validators.maxLength(30)],
+          Validators.maxLength(30),notBlank],
+    model: ['',Validators.required,Validators.maxLength(30),notBlank],
     year: this.formbuilder.control<number | null>(null, [Validators.min(1950),
           Validators.max(this.currentYear + 1),]),
 
