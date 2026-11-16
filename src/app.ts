@@ -5,9 +5,11 @@ import { validate } from "./middleware/auth.middleware";
 import { swaggerSpec } from "./config/swagger";
 import swaggerUi from "swagger-ui-express";
 import cors from "cors";
+import authRoutes from './routes/auth';
 
 //had to change this for the exports and everything elese. 
 export const app: Application = express(); 
+app.use('/api/v1/auth',authRoutes);
 app.use(cors());
 app.use(express.json());
 app.use((_req, _res, next) => setTimeout(next, 2000)); // Simulate a delay of 1 second

@@ -4,8 +4,6 @@ import { HydratedDocument, model } from 'mongoose';
 
 const CarModel = model<ICar>('Car', CarSchema);
 
- 
-
 export class CarService { 
   async getAllCars(): Promise<ICar[]> { 
     return await CarModel.find().lean();  
