@@ -1,25 +1,51 @@
-import{ Request, Response, NextFunction } from 'express';
-import { z } from 'zod';
+import { Request, Response, NextFunction } from 'express';
+import { UnauthorizedError } from '../utils/apperrors';
+import { AuthService, TokenPayload  } from '../services/auth';
 
 
-export const validate = (schema: z.ZodObject<any>)   => ( 
-  req: Request, res: Response, next: NextFunction 
-) : void => { 
-    //adding this to check if get or delete request as they dont have  abody
-    if(req.method === 'GET' || req.method === 'DELETE') {
-        next();
+
+// Tell TypeScript that Request can now carry the decoded token
+declare global {
+  namespace Express {
+    interface Request {
+      user?: TokenPayload;
+    }
+  }
+}
+
+const authService = new AuthService();
+
+export const authenticateKey = async (req : Request, res : Response, next : NextFunction): Promise<void> => {
+    const apiKey = req.headers['x-api-key'];
+
+    if (!apiKey ) {
+       res.status(401).json({
+      status: 'fail',
+      message: 'Unauthorized: Missing or invalid api-key header'
+    });
+
+     return;
+    }
+    next();
+};
+
+
+// Expects the header:  Authorization: Bearer <token>
+export const authenticateJWT = (req : Request, _res : Response, next : NextFunction): void => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        next(new UnauthorizedError('Missing or invalid Authorization header'));
         return;
     }
 
-  const validation = schema.safeParse(req.body); 
-  if (!validation.success) { 
-    res.status(400).json({ 
-      message: 'Validation failed numb nuts', 
-      errors: validation.error.issues
-    }); 
-    return; 
-  } 
-  req.body = validation.data 
+    const token = authHeader.split(' ')[1];
 
-  next(); 
-}; 
+    try {
+        // throws if the signature is wrong or the token has expired
+        req.user = authService.verifyToken(token);
+        next();
+    } catch {
+        next(new UnauthorizedError('Invalid or expired token'));
+    }
+};

@@ -9,9 +9,10 @@ import authRoutes from './routes/auth';
 
 //had to change this for the exports and everything elese. 
 export const app: Application = express(); 
+app.use(cors());
 app.use(express.json());
 app.use('/api/v1/auth',authRoutes);
-app.use(cors());
+
 app.use((_req, _res, next) => setTimeout(next, 2000)); // Simulate a delay of 1 second
 
 app.use('/api/v1/cars',validate(carSchemaZSchema), carRoutes);
