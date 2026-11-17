@@ -13,7 +13,8 @@ Content-Type: application/json
     "password":"SuperSecret Password"
 }
 
-### log michael in 
+### log michael in
+# @name login
 POST {{endpoint}}/auth/login HTTP/3.0
 Content-Type: application/json
 
@@ -33,6 +34,7 @@ Content-Type: application/json
 }
 
 ### log una in 
+# @name login
 POST {{endpoint}}/auth/login HTTP/3.0
 Content-Type: application/json
 
@@ -40,3 +42,14 @@ Content-Type: application/json
     "email":"privateUna@example.com",
     "password":"SuperDuperSecret Password"
 }
+###
+
+@accessToken = {{login.response.body.token}}
+DELETE {{endpoint}}/cars/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+
+GET {{endpoint}}/auth/me HTTP/1.1
+Authorization: Bearer {{accessToken}}
