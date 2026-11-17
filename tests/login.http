@@ -13,4 +13,30 @@ Content-Type: application/json
     "password":"SuperSecret Password"
 }
 
+### log michael in 
+POST {{endpoint}}/auth/login HTTP/3.0
+Content-Type: application/json
+
+{
+    "email":"private@example.com",
+    "password":"SuperSecret Password"
+}
 ###
+
+POST {{endpoint}}/auth/register HTTP/3.0
+Content-Type: application/json
+
+{
+    "name":"UNA",
+    "email":"privateUna@example.com",
+    "password":"SuperDuperSecret Password"
+}
+
+### log una in 
+POST {{endpoint}}/auth/login HTTP/3.0
+Content-Type: application/json
+
+{
+    "email":"privateUna@example.com",
+    "password":"SuperDuperSecret Password"
+}

@@ -1,3 +1,4 @@
+import { env } from "../config/env";
 import mongoose from "mongoose";
 
  
@@ -8,8 +9,8 @@ export const disconnectDB = async (): Promise<void> => {
 
 export const connectDB = async () : Promise<void> => {
   try{
-    //console.log(`Connecting to MongoDB at ${env.mongodbUri}`);
-   // const conn = await mongoose.connect(env.mongodbUri);
+    console.log(`Connecting to MongoDB`);
+    const conn = await mongoose.connect(env.mongodbUri);
     console.log(`MongoDB connected :)`);
 
   }catch (error){

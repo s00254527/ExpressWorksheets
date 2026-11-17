@@ -18,4 +18,8 @@ export class AuthController{
 
         res.status(200).json({token});
     }
+    me = async (req:Request,res:Response):Promise<void> =>{
+        const user = await authService. getUserById(req.user!.sub);
+        res.status(200).json(user);
+    }
 }

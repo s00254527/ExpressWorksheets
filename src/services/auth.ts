@@ -64,7 +64,7 @@ createToken(payload:TokenPayload):string{
     }
 
     async login(email:string,password:string): Promise<string>{
-        const user = await UserModel.findOne({email})
+        const user = await UserModel.findOne({email}).select('+passwordHash')
 
         if(!user){
             throw new UnauthorizedError("Invalid emial or password");
@@ -79,5 +79,10 @@ createToken(payload:TokenPayload):string{
             await user.save();
         }
         return this.createToken({sub:user._id.toString(),email:user.email});
+    }
+    async getUserById(id:string):Promise<PublicUser>{
+        const user = await UserModel.findById(id).lean();
+        if(!user) throw new UnauthorizedError('User Not Found');
+        return {_id:user._id.toString(),name:user.name,email:user.email};
     }
 }
