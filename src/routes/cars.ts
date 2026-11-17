@@ -12,7 +12,6 @@ router.get('/', carController.getAllCars);
 
 router.get('/:id',carController.getCarById); 
 
-
 router.post('/', carController.createCar2); 
 
 //router.put('/:id', carController.updateCar); 

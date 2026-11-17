@@ -1,6 +1,7 @@
 import { Request,Response } from "express";
 import { AuthService } from "../services/auth";
 
+
 const authService = new AuthService();
 
 export class AuthController{
@@ -11,4 +12,10 @@ export class AuthController{
         res.status(201).json(user);
 
     };
+    login = async (req:Request, res:Response): Promise<void> =>{
+        const {email,password} = req.body;
+        const token = await authService.login(email,password);
+
+        res.status(200).json({token});
+    }
 }

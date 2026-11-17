@@ -7,7 +7,7 @@ export class AppError extends Error {
     }
 }
 
-export class UserAlreadyExsistsError extends AppError{
+export class UserAlreadyExistsError extends AppError{
 constructor(){
     super('User already exists', 409);
 }

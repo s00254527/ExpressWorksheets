@@ -15,10 +15,11 @@ export const validate = (schema: z.ZodObject<any>)   => (
   if (!validation.success) { 
     res.status(400).json({ 
       message: 'Validation failed numb nuts', 
-      errors: validation.error.issues 
+      errors: validation.error.issues
     }); 
     return; 
   } 
   req.body = validation.data 
+
   next(); 
 }; 
