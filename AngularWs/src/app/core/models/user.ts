@@ -9,7 +9,7 @@ export interface RegisterUserDto{
     password:string;
 }
 
-export interface LongUserDto{
+export interface LoginUserDto{
     email:string;
     password:string;
 }
