@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 import { CarList } from './features/cars/pages/car-list/car-list';
 import { CarDetials } from './features/cars/pages/car-detials/car-detials';
 import { CarForm } from './features/cars/pages/car-form/car-form';
+import { Register } from './features/auth/pages/register/register';
+
+
 
 export const routes: Routes = [
     {path:'', redirectTo: 'cars', pathMatch: 'full'},
@@ -9,5 +12,6 @@ export const routes: Routes = [
     {path:'cars/new',component:CarForm},
     {path:'cars/:id',component:CarDetials},
     {path:'cars/:id/edit',component:CarForm},
+    {path:'register',component:Register},
     
 ];
